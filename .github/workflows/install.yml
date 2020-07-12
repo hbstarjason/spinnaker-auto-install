@@ -32,3 +32,45 @@ jobs:
         
         chmod +x ./InstallHalyard.sh
         sudo bash InstallHalyard.sh --user runner -y
+
+        hal -v    
+        hal version list
+
+    - name: Install Kubectl and Configuration
+      run: |
+        pwd
+        cd /home/runner
+        KUBECTL_VER="v1.18.0"
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VER}/bin/linux/amd64/kubectl
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/bin/kubectl
+        mkdir /home/runner/.kube
+        cat <<-EOF > /home/runner/.kube/config
+        ${{ secrets.KUBECONFIG }}
+        EOF
+        kubectl version
+    
+    - name: Config kubernetes Cluster
+      run: |
+        hal config provider kubernetes enable
+        hal config provider kubernetes account add my-k8s \
+           --provider-version v2 \
+           --context $(kubectl config current-context)
+        hal config deploy edit --type=distributed --account-name my-k8s
+        
+        ### Add Other kubernetes Cluster
+        ### hal config provider kubernetes account add my-k8s-int --provider-version v2  --kubeconfig-file /root/.kube/XXX
+    
+    - name: Config storage
+      run: |
+        hal config storage edit --type redis
+
+        #### s3
+
+    - name: Config Spinnaker features
+      run: |
+        hal config features edit --jobs true
+        hal config features edit --pipeline-templates true
+        hal config features edit --artifacts true
+        hal config features edit --managed-pipeline-templates-v2-ui true
+
