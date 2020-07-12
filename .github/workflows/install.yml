@@ -37,15 +37,8 @@ jobs:
 
         hal -v    
         hal version list
-        hal version bom ${SPINNAKER_VERSION} -q -o yaml > hal-bom.yaml
-
-    - name: Create Artifact
-      run: mkdir staging && cp bom.yaml staging
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v1
-      with:
-         name: hal-bom-${{github.sha}}
-         path: staging      
+        eho "###### hal version bom ######"
+        hal version bom ${SPINNAKER_VERSION} -q -o yaml     
 
     - name: Install Kubectl and Configuration
       run: |
