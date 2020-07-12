@@ -1,4 +1,7 @@
 name: spinnaker-auto-install
+env:
+  SPINNAKER_VERSION: 1.21.0
+  KUBECTL_VERSION: v1.18.0
 
 on:
   push:
@@ -28,7 +31,7 @@ jobs:
         echo "###system version" &&  cat /etc/issue
         echo "###docker info" && docker info 
         
-        SPINNAKER_VERSION="1.21.0"
+        
 
         curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
         
@@ -43,14 +46,16 @@ jobs:
       run: |
         pwd
         cd /home/runner
-        KUBECTL_VER="v1.18.0"
-        curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VER}/bin/linux/amd64/kubectl
+        
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/bin/kubectl
+        
         mkdir /home/runner/.kube
         cat <<-EOF > /home/runner/.kube/config
         ${{ secrets.KUBECONFIG }}
         EOF
+        
         kubectl version
     
     - name: Config kubernetes Cluster
