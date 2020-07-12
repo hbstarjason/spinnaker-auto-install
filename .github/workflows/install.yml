@@ -31,16 +31,21 @@ jobs:
         echo "###system version" &&  cat /etc/issue
         echo "###docker info" && docker info 
         
-        
-
         curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
-        
         chmod +x ./InstallHalyard.sh
         sudo bash InstallHalyard.sh --user runner -y
 
         hal -v    
         hal version list
-        hal version bom ${SPINNAKER_VERSION} -q -o yaml
+        hal version bom ${SPINNAKER_VERSION} -q -o yaml > hal-bom.yaml
+
+    - name: Create Artifact
+      run: mkdir staging && cp bom.yaml staging
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+         name: hal-bom-${{github.sha}}
+         path: staging      
 
     - name: Install Kubectl and Configuration
       run: |
@@ -55,12 +60,13 @@ jobs:
         cat <<-EOF > /home/runner/.kube/config
         ${{ secrets.KUBECONFIG }}
         EOF
-        
+
         kubectl version
     
     - name: Config kubernetes Cluster
       run: |
         sudo hal config version edit --version ${SPINNAKER_VERSION}
+
         hal config provider kubernetes enable
         hal config provider kubernetes account add my-k8s \
            --provider-version v2 \
@@ -68,13 +74,13 @@ jobs:
         hal config deploy edit --type=distributed --account-name my-k8s
         
         ### Add Other kubernetes Cluster
-        ### hal config provider kubernetes account add my-k8s-int --provider-version v2  --kubeconfig-file /root/.kube/XXX
+        ### hal config provider kubernetes account add my-k8s-int --provider-version v2  --kubeconfig-file /root/.kube/config
     
     - name: Config storage
       run: |
         hal config storage edit --type redis
 
-        #### s3
+        #### config s3
 
     - name: Config Spinnaker features
       run: |
@@ -82,4 +88,10 @@ jobs:
         hal config features edit --pipeline-templates true
         hal config features edit --artifacts true
         hal config features edit --managed-pipeline-templates-v2-ui true
+
+    - name: Config Spinnaker Images
+      run: |
+        cd /home/runner/.hal/default/ && \
+        mkdir service-settings && \
+        cd service-settings    
 
