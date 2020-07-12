@@ -28,6 +28,8 @@ jobs:
         echo "###system version" &&  cat /etc/issue
         echo "###docker info" && docker info 
         
+        SPINNAKER_VERSION="1.21.0"
+
         curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
         
         chmod +x ./InstallHalyard.sh
@@ -35,6 +37,7 @@ jobs:
 
         hal -v    
         hal version list
+        hal version bom ${SPINNAKER_VERSION} -q -o yaml
 
     - name: Install Kubectl and Configuration
       run: |
@@ -52,6 +55,7 @@ jobs:
     
     - name: Config kubernetes Cluster
       run: |
+        sudo hal config version edit --version ${SPINNAKER_VERSION}
         hal config provider kubernetes enable
         hal config provider kubernetes account add my-k8s \
            --provider-version v2 \
