@@ -69,7 +69,7 @@ jobs:
 
     - name: Config Spinnaker features
       run: |
-        hal config features edit --jobs true
+        ###hal config features edit --jobs true
         hal config features edit --pipeline-templates true
         hal config features edit --artifacts true
         hal config features edit --managed-pipeline-templates-v2-ui true
