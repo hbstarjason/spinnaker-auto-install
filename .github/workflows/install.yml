@@ -37,7 +37,7 @@ jobs:
 
         hal -v    
         hal version list
-        eho "###### hal version bom ######"
+        echo "###### hal version bom ######"
         hal version bom ${SPINNAKER_VERSION} -q -o yaml     
 
     - name: Install Kubectl and Configuration
