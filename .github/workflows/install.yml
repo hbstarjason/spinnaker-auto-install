@@ -1,0 +1,34 @@
+name: spinnaker-auto-install
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  #schedule:
+  #  - cron:  5 0 * * * 
+      # Runs at 00:05 UTC every day
+      # https://tool.lu/crontab/ 
+  #watch:
+  #    types: started   
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    #runs-on: ubuntu-18.04
+    #if: github.event.repository.owner.id == github.event.sender.id
+    # https://p3terx.com/archives/github-actions-manual-trigger.html
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Halyard
+      run: |
+        echo "###user" && whoami 
+        echo "###system version" &&  cat /etc/issue
+        echo "###docker info" && docker info 
+        
+        curl -O https://raw.githubusercontent.com/spinnaker/halyard/master/install/debian/InstallHalyard.sh
+        
+        chmod +x ./InstallHalyard.sh
+        bash InstallHalyard.sh --user runner -y
