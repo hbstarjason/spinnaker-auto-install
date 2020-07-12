@@ -42,7 +42,9 @@ jobs:
 
     - name: Install Kubectl and Configuration
       run: |
+        echo "###### pwd ######"
         pwd
+
         cd /home/runner
         
         curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
@@ -53,9 +55,13 @@ jobs:
         cat <<-EOF > /home/runner/.kube/config
         ${{ secrets.KUBECONFIG }}
         EOF
-
+        
+        echo "###### kubectl version ######"
         kubectl version
-    
+        
+        echo "###### pwd ######"
+        pwd
+
     - name: Config kubernetes Cluster
       run: |
         sudo hal config version edit --version ${SPINNAKER_VERSION}
@@ -87,4 +93,14 @@ jobs:
         cd /home/runner/.hal/default/ && \
         mkdir service-settings && \
         cd service-settings    
+        
+        echo "###### pwd ######"
+        pwd
 
+    - name: Deploy Spinnaker
+      run: |
+        # hal deploy apply
+       
+    - name: Deploy Spinnaker Ingress
+      run: |
+        ###       
