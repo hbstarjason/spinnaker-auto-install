@@ -22,28 +22,28 @@
 
    
 
-   注意：将（.github/workflows/install.yml）文件里面的`# hal deploy apply`注释取消掉，才会自动部署！
+   注意：将（[install.yml](.github/workflows/install.yml)）文件里面的`# hal deploy apply`注释取消掉，才会自动部署！
 
 
 
 ## 需要优化（RoadMap）
 
-- [ ] 进一步优化Github Actions的脚本（.github/workflows/install.yml），让其更加简单优雅。
-- [ ] 自动优雅的下载Spinnaker组件的镜像，并同步转存到指定的Registry上。（现在是放在DockerHub上。）
-- [ ] 暂时使用的redis作为spinnaker的存储，官网已有提示，是***<u>不推荐的</u>***！请参考官网：（[redis](https://spinnaker.io/setup/install/storage/redis/)）
-- [ ] 需要部署到生产环境的话，需要将几个核心组件（Orca、Clouddriver、Front50）的数据做持久化。请参考官网：（[productionize](https://spinnaker.io/setup/productionize/)）
+- [ ] 进一步优化Github Actions的脚本（[install.yml](.github/workflows/install.yml)），让其更加简单优雅。
+- [ ] 自动优雅的下载Spinnaker组件的镜像，并同步转存到指定的Registry上。（现在镜像都是放在DockerHub上的。）
+- [ ] 暂时使用的redis作为spinnaker的存储，官网已有提示，是***<u>不推荐的</u>***！请参考官网:[redis](https://spinnaker.io/setup/install/storage/redis/)（对接S3在[install.yml](.github/workflows/install.yml)里已有注释说明）
+- [ ] 需要部署到生产环境的话，需要将几个核心组件（Orca、Clouddriver、Front50）的数据做持久化。请参考官网:[productionize](https://spinnaker.io/setup/productionize/)
 - [ ] 暂时没有开启Spinnaker管理多个Kubernetes集群，想开启也是很简单的。（[install.yml](.github/workflows/install.yml)文件里已有注释说明）
-- [ ] 暂时没有开启Spinnaker与Git仓库（如GitLab等）的对接，想开启也是很简单的。（.github/workflows/install.yml文件里有注释说明）
-- [ ] 暂时没有开启Spinnaker与CI System（如Jenkins等）对接，想开启也是很简单的。（.github/workflows/install.yml文件里有注释说明）
-- [ ] 暂时没有开启Spinnaker与监控系统（如Prometheus等）对接，想开启也是很简单的。（.github/workflows/install.yml文件里有注释说明）
-- [ ] 已安装Canary组件并开启功能，但是没有对接Prometheus，因此不能使用Prometheus进行Canary Analysis。
-- [ ] 暂时未开启SSL。请参考官网：（[ssl](https://spinnaker.io/setup/security/ssl/)）
-- [ ] Spinnaker的Authentication和Authorization，需要借助第三方。请参考官网：（[security](https://spinnaker.io/setup/security/)）
-- [x] ~~Spinnaker是自带CI系统的，不推荐使用。~~请参考官网：（[bakery](https://spinnaker.io/setup/bakery/)）
+- [ ] 暂时没有开启Spinnaker与Git仓库（如GitLab等）的对接，想开启也是很简单的。（[install.yml](.github/workflows/install.yml)文件里有注释说明）
+- [ ] 暂时没有开启Spinnaker与CI System（如Jenkins等）对接，想开启也是很简单的。（[install.yml](.github/workflows/install.yml)文件里有注释说明）
+- [ ] 暂时没有开启Spinnaker与监控系统（如Prometheus等）对接，想开启也是很简单的。（[install.yml](.github/workflows/install.yml)文件里有注释说明）
+- [x] 已安装Canary组件并开启功能，但是没有对接Prometheus，因此不能使用Prometheus进行Canary Analysis。
+- [x] 暂时未开启SSL。请参考官网:[ssl](https://spinnaker.io/setup/security/ssl/)
+- [x] Spinnaker的Authentication和Authorization，需要借助第三方。请参考官网:[security](https://spinnaker.io/setup/security/)
+- [x] ~~Spinnaker是自带CI系统的，不推荐使用。~~请参考官网:[bakery](https://spinnaker.io/setup/bakery/)
 
 
 
 ## 吐槽（Others）：
 
-- 如果你能科学富强的话，上面都是然并卵，通过Halyard命令，只需要不到10行命令就能安装好Spinnaker！
-- 如果你不能科学富强的话，不用上面的，保证你肯定安装不上Spinnaker！！！
+- 如果你能**科学富强**的话，上面都是然并卵，通过Halyard命令，只需要不到10行命令就能安装好Spinnaker！
+- 如果你不能**科学富强**的话，不用上面的，保证你肯定安装不上Spinnaker！！！
