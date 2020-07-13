@@ -99,7 +99,10 @@ jobs:
         
         echo "###### pwd ######"
         pwd
-
+       
+        sh /home/runner/work/spinnaker-auto-install/spinnaker-auto-install/config-images.sh	
+        echo "###### ls ######"
+        ls
     - name: Deploy Spinnaker
       run: |
         # hal deploy apply
