@@ -109,4 +109,6 @@ jobs:
        
     - name: Deploy Spinnaker Ingress
       run: |
-        ###       
+        ### sh /home/runner/work/spinnaker-auto-install/spinnaker-auto-install/create-ingress.sh
+
+        echo "###### Congratulations, installation and deployment of Spinnaker is complete ! ######"     
