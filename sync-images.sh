@@ -41,6 +41,6 @@ docker pull gcr.io/spinnaker-marketplace/rosco:0.20.0-20200625014618 && \
 docker tag gcr.io/spinnaker-marketplace/rosco:0.20.0-20200625014618 hbstarjason/rosco:0.20.0-20200625014618 && \
 docker push hbstarjason/rosco:0.20.0-20200625014618
 
-docker pull gcr.io/spinnaker-marketplace/redis:2:2.8.4-2 && \
-docker tag gcr.io/spinnaker-marketplace/redis:2:2.8.4-2 hbstarjason/redis:2:2.8.4-2 && \
-docker push hbstarjason/redis:2:2.8.4-2
+docker pull gcr.io/kubernetes-spinnaker/redis-cluster:v2 && \
+docker tag gcr.io/spinnaker-marketplace/redis-cluster:v2 hbstarjason/redis-cluster:v2 && \
+docker push hbstarjason/redis-cluster:v2

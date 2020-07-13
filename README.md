@@ -35,3 +35,9 @@
 - [ ] Spinnaker的Authentication和Authorization，需要借助第三方。请参考官网：（https://spinnaker.io/setup/security/）
 - [x] ~~Spinnaker是自带CI系统的，不推荐使用。~~请参考官网：（https://spinnaker.io/setup/bakery/）
 
+
+
+## 吐槽（Others）：
+
+- 如果你能科学富强的话，上面都是然并卵，通过Halyard命令，只需要不到10行命令就能安装好Spinnaker！
+- 如果你不能科学富强的话，不用上面的，保证你肯定安装不上Spinnaker！
