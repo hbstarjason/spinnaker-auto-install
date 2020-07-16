@@ -6,29 +6,32 @@
 - 利用Github Actions 自动（***<u>优雅并科学的</u>***）安装Spinnaker到任何Kubernetes集群上。
 - **无需任何科学（富强）工具。**
 
-## 当前版本信息：
+## 当前版本信息（Version）：
 
 - Spinnaker Version：1.21.0 (Dark)
 
-  
+## 先决条件（precondition）：
+
+- 已运行正常的Kubernetes集群，集群需要联网，能让外网通过kubectl命令连接上集群。
+- 提前安装好Nginx Ingress Controller。
+- 集群需要能自动下载DockerHub上的镜像。如果想用私有仓库的镜像，请修改（[config-images.sh](https://github.com/hbstarjason/spinnaker-auto-install/blob/master/config-images.sh)）文件里的镜像地址。
 
 ## 食用方法（User Guide）：
 
-1. 首先**Fork**本库。
+1. 首先“**Fork**”本库。
 
 2. 点击仓库的“settings”，增加“Secrets”，名称为“KUBECONFIG”，值则填写你的Kubernetes集群的“kubeconfig”文件所有内容。那么，spinnaker就会被安装部署到这个kubernetes集群上。
 
 3. Kubernetes集群需要提前安装好Nginx Ingress Controller。那么，就可以直接使用URL：http://deck.hbstarjason.spinnaker/) 访问Spinnaker的界面。（*注意：请提前做好本地域名解析*！）
 
-   
-
-   注意：将（[install.yml](.github/workflows/install.yml)）文件里面的`# hal deploy apply`注释取消掉，才会自动部署！
+   注意：部署之前，请将（[install.yml](.github/workflows/install.yml)）文件里面的`# hal deploy apply`注释取消掉，才会自动部署！
 
 
 
 ## 需要优化（RoadMap）
 
 - [ ] 进一步优化Github Actions的脚本（[install.yml](.github/workflows/install.yml)），让其更加简单优雅。
+- [ ] 适配其他更多的Ingress Controller。（目前只做了Nginx Ingress Controller适配）
 - [ ] 自动优雅的下载Spinnaker组件的镜像，并同步转存到指定的Registry上。（现在镜像都是放在DockerHub上的。）
 - [ ] 暂时使用的redis作为spinnaker的存储，官网已有提示，是***<u>不推荐的</u>***！请参考官网:[redis](https://spinnaker.io/setup/install/storage/redis/)（对接S3在[install.yml](.github/workflows/install.yml)里已有注释说明）
 - [ ] 需要部署到生产环境的话，需要将几个核心组件（Orca、Clouddriver、Front50）的数据做持久化。请参考官网:[productionize](https://spinnaker.io/setup/productionize/)
@@ -45,5 +48,5 @@
 
 ## 吐槽（Others）：
 
-- 如果你能**科学富强**的话，上面都是然并卵，通过Halyard命令，只需要不到10行命令就能安装好Spinnaker！
+- 如果你能**科学富强**的话，上面其实都是然并卵，通过Halyard命令，只需要不到10行命令就能安装好Spinnaker！
 - 如果你不能**科学富强**的话，不用上面的，保证你肯定安装不上Spinnaker！！！
