@@ -21,6 +21,7 @@ jobs:
     #runs-on: ubuntu-18.04
     #if: github.event.repository.owner.id == github.event.sender.id
     # https://p3terx.com/archives/github-actions-manual-trigger.html
+    # https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#supported-runners-and-hardware-resources
     
     steps:
     - uses: actions/checkout@v2
