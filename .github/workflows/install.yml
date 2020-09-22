@@ -38,7 +38,10 @@ jobs:
 
         chmod +x ./InstallHalyard.sh
         sudo bash InstallHalyard.sh --user runner -y
-
+        
+        # useradd -m zhang
+        # bash InstallHalyard.sh --user zhang -y
+        
         hal -v    
         hal version list
         echo "###### hal version bom ######"
