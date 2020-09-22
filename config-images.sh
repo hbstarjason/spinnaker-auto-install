@@ -19,7 +19,7 @@ artifactId: hbstarjason/front50:0.24.0-20200625140019
 EOF
 
 cat >> gate.yml <<EOF
-artifactId: hbstarjason/1.17.0-20200625140019
+artifactId: hbstarjason/gate:1.17.0-20200625140019
 overrideBaseUrl: http://gate.hbstarjason.spinnaker
 EOF
 
