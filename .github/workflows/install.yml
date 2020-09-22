@@ -80,7 +80,14 @@ jobs:
         hal config provider kubernetes account add my-k8s \
            --provider-version v2 \
            --context $(kubectl config current-context)
+        
         hal config deploy edit --type=distributed --account-name my-k8s
+        
+        ### hal config deploy edit \
+        ###     --account-name default \
+        ###     --type distributed \
+        ###     --location spinnaker \
+        ###     --no-validate
         
         ### Add Other kubernetes Cluster
         ### hal config provider kubernetes account add my-k8s-int --provider-version v2  --kubeconfig-file /root/.kube/config
@@ -113,7 +120,11 @@ jobs:
     - name: Deploy Spinnaker
       run: |
         # hal deploy apply
-       
+        
+        ## hal config security ui edit --override-base-url ${DECK_HOST} --no-validate
+        ## hal config security api edit --override-base-url ${GATE_HOST} --no-validate
+        ## hal deploy apply --no-validate
+        
     - name: Deploy Spinnaker Ingress
       run: |
         ### sh /home/runner/work/spinnaker-auto-install/spinnaker-auto-install/create-ingress.sh
