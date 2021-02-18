@@ -4,6 +4,7 @@ env:
   KUBECTL_VERSION: v1.18.0
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
